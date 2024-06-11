@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <conio.h>
 #include <windows.h>
+#include <ctime>
+
 
 #define BLUE 1
 #define GREEN 2
@@ -256,6 +258,18 @@ class Receipt{
 	    }
 	
 	    void displayReceipt() {
+	    	time_t now = time(0);
+            tm *ltm = localtime(&now);
+
+            // Tampilkan waktu saat ini
+            cout << "Time: " 
+                 << 1900 + ltm->tm_year << "-"
+                 << 1 + ltm->tm_mon << "-"
+                 << ltm->tm_mday << " "
+                 << 1 + ltm->tm_hour << ":"
+                 << 1 + ltm->tm_min << ":"
+                 << 1 + ltm->tm_sec << endl;
+	    	
 	        while (!orderq.empty()) {
 	            Order<T> order = orderq.front();
 	            order.displayOrder();
@@ -289,9 +303,17 @@ void window(){
 	gotoxy(i, maxy);
 	cout << "\xcd";
 	}
+	
+	char welcome[] = " __          __ ______  _       _____  ____   __  __  ______       _______  ____                      \n \\ \\        / /|  ____|| |     / ____|/ __ \\ |  \\/  ||  ____|     |__   __|/ __ \\                     \n  \\ \\  /\\  / / | |__   | |    | |    | |  | || \\  / || |__           | |  | |  | |                    \n   \\ \\/  \\/ /  |  __|  | |    | |    | |  | || |\\/| ||  __|          | |  | |  | |                    \n    \\  /\\  /   | |____ | |____| |____| |__| || |  | || |____         | |  | |__| |                    \n     \\/  \\/    |______||______|\\_____|\\____/ |_|  |_||______|        |_|   \\____/                     \n  _    _         _____  ____   _____  _______  ______  _  __  _____  ______ _____  ______  _____   _____ \n | |  | |    /\\    |  \\/  ||  \\/  ||  ____||  __ \\      |  _ \\    /\\    | |/ /|  ____||  __ \\ \\   / /\n | |__| |   /  \\   | \\  / || \\  / || |__   | |__) |     | |_) |  /  \\   | ' / | |__   | |__) |\\ \\_/ / \n |  __  |  / /\\ \\  | |\\/| || |\\/| ||  __|  |  _  /      |  _ <  / /\\ \\  |  <  |  __|  |  _  /  \\   /  \n | |  | | / ____ \\ | |  | || |  | || |____ | | \\ \\      | |_) |/ ____ \\ | . \\ | |____ | | \\ \\   | |   \n |_|  |_|/_/    \\_\\|_|  |_||_|  |_||______||_|  \\_\\     |____//_/    \\_\\|_|\\_\\|______||_|  \\_\\  |_|   \n                                                                                                      \n                                                                                                      \n";
+
+	
+	textcolor(PINK);
+	gotoxy(1,1);
+	cout << welcome <<endl;
 }
 
 void window2(){
+	textcolor(PURPLE);
 	for(int i=1; i<maxx+1; i++){
 	gotoxy(i, 2);
 	cout << "\xcd";
@@ -316,21 +338,16 @@ void window2(){
 //	gotoxy(i, maxy);
 //	cout << "\xcd";
 //	}
+	textcolor(WHITE);
 }
 
 int main(){
-	textcolor(PURPLE);
+	
 	setcursor(0,0);
+	system("cls");
 	
-	system("cls");	
-	
+	textcolor(PURPLE);
 	window();
-	
-	char welcome[] = " __          __ ______  _       _____  ____   __  __  ______       _______  ____                      \n \\ \\        / /|  ____|| |     / ____|/ __ \\ |  \\/  ||  ____|     |__   __|/ __ \\                     \n  \\ \\  /\\  / / | |__   | |    | |    | |  | || \\  / || |__           | |  | |  | |                    \n   \\ \\/  \\/ /  |  __|  | |    | |    | |  | || |\\/| ||  __|          | |  | |  | |                    \n    \\  /\\  /   | |____ | |____| |____| |__| || |  | || |____         | |  | |__| |                    \n     \\/  \\/    |______||______|\\_____|\\____/ |_|  |_||______|        |_|   \\____/                     \n  _    _         _____  ____   _____  _______  ______  _  __  _____  ______ _____  ______  _____   _____ \n | |  | |    /\\    |  \\/  ||  \\/  ||  ____||  __ \\      |  _ \\    /\\    | |/ /|  ____||  __ \\ \\   / /\n | |__| |   /  \\   | \\  / || \\  / || |__   | |__) |     | |_) |  /  \\   | ' / | |__   | |__) |\\ \\_/ / \n |  __  |  / /\\ \\  | |\\/| || |\\/| ||  __|  |  _  /      |  _ <  / /\\ \\  |  <  |  __|  |  _  /  \\   /  \n | |  | | / ____ \\ | |  | || |  | || |____ | | \\ \\      | |_) |/ ____ \\ | . \\ | |____ | | \\ \\   | |   \n |_|  |_|/_/    \\_\\|_|  |_||_|  |_||______||_|  \\_\\     |____//_/    \\_\\|_|\\_\\|______||_|  \\_\\  |_|   \n                                                                                                      \n                                                                                                      \n";
-	
-	textcolor(PINK);
-	gotoxy(1,1);
-	cout << welcome <<endl;
 	textcolor(WHITE);	
 	UserManager<string> um;
 	um.loadUsers();
@@ -347,7 +364,10 @@ int main(){
 	
 	int choice;
 	string username, password, custom;
-
+	
+	textcolor(PURPLE);
+	window();
+	textcolor(WHITE);
 	
 	while (true) {
 		
@@ -428,8 +448,11 @@ int main(){
 	            }
 	        }
 	        
-	       
+	       	
+	       	window2();
 	        cout << "\nConfirm your order? (y/n): \n";
+	        cout << endl;
+	        
 	        char confirm;
 	        cin >> confirm;
 	        if (confirm == 'y') {
@@ -438,6 +461,7 @@ int main(){
 	            for (const auto &order : orders) {
 	                r.addOrder(order);
 	            }
+	            cout << endl << "Receipt: "<<endl;
 	            r.displayReceipt();
 	        }
 	        cout<<endl;
@@ -447,6 +471,7 @@ int main(){
 	        if (orderAgain != 'y') {
 	            break;
 	        }
+	        system("cls");
 	    } else if (choice == 3) {
 	        break;
 	    } else {
