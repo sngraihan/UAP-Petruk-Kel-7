@@ -120,6 +120,45 @@ class CakeManager{
 };
 
 
+//order
+template <typename T>
+class Order {
+    private:
+        Cake<T> cake;
+        T custom;
+        
+    public:
+        Order(const Cake<T> &cake, const T &custom) : cake(cake), custom(custom){    
+        
+        }
+        
+        void displayOrder()const {
+            cout << "Cake: " << cake.getName() << endl <<
+            "Customization: " << custom << endl << 
+            "Price: " << cake.getPrice() << endl << endl;
+        }
+};
+
+template <typename T>
+class OrderManager{
+    private:
+        vector<Order<T>> orders;
+        
+    public:
+        void placeOrder(const Cake<T> &cake, const T custom){
+            orders.push_back(Order<T>(cake, custom));
+        }
+        
+        vector<Order<T>> getOrders()const {
+            return orders;
+        }
+        
+        void displayOrders()const {
+            for (const auto &itr : orders) {
+                itr.displayOrder();
+            }
+        }
+};
 
 int main() {
     
