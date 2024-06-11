@@ -144,10 +144,10 @@ class Cake{
 template <typename T>
 class CakeManager{
 	private:
-		vector<Cake<T>*> cakes; // Menggunakan pointer ke Cake
+		vector<Cake<T>*> cakes;
 		
 	public:
-		~CakeManager() {
+		CakeManager() {
 			for (Cake<T>* cake : cakes) {
 				delete cake;
 			}
@@ -157,10 +157,11 @@ class CakeManager{
 			cakes.push_back(new Cake<T>(name, desc, price));
 		}
 		void displayCakes() const{
+			gotoxy(1, 3);
 			for(size_t i = 0; i < cakes.size(); i++){
-				cout << i+1 << ". Name: " << cakes[i]->getName() << endl <<
-				"Description: " << cakes[i]->getDesc() << endl << 
-				"Price: Rp" << cakes[i]->getPrice() << 'k' <<endl << endl;
+				cout << i+1 << ". Name: " << cakes[i]->getName() << endl;
+				cout << "Description: " << cakes[i]->getDesc() << endl;
+				cout << "Price: Rp" << cakes[i]->getPrice() << 'k' <<endl << endl;
 			}
 		}
 		vector<Cake<T>*> getCakes()const {
@@ -200,7 +201,6 @@ class OrderManager{
 	private:
 		vector<Order<T>> orders;
 		
-		// Fungsi Quick Sort
 		int partition(int low, int high) {
 			double pivot = orders[high].getPrice();
 			int i = (low - 1);
@@ -291,7 +291,32 @@ void window(){
 	}
 }
 
-
+void window2(){
+	for(int i=1; i<maxx+1; i++){
+	gotoxy(i, 2);
+	cout << "\xcd";
+	}
+	
+//	for(int i=2 ;i< maxy-2;i++){
+//		gotoxy(maxx-15, i);
+//		cout << "\xba";
+//	}
+	
+	for(int i=2 ;i< maxy-2;i++){
+		gotoxy(maxx, i);
+		cout << "\xba";
+	}
+	
+	for(int i=1; i<maxx+1; i++){
+	gotoxy(i, maxy-3);
+	cout << "\xcd";
+	}
+	
+//	for(int i=1; i<maxx+1; i++){
+//	gotoxy(i, maxy);
+//	cout << "\xcd";
+//	}
+}
 
 int main(){
 	textcolor(PURPLE);
@@ -363,18 +388,21 @@ int main(){
 		        gotoxy(midx-5, midy+9);
 		        cin >> password;
 	            if (um.loginUser(username, password)) {
+	            	gotoxy(midx-5, midy+10);
 	                cout << "Login Successfully!" << endl << endl;
 	                break;
 	            } else {
+	            	gotoxy(midx-5, midy+10);
 	                cout << "Wrong username or password!" << endl;
 	            }
 	        }
 	        
-	        system("cls");
-	        window2();
+	        gotoxy(midx-7, 1);
 	        // Katalog kue
 	        bool ordering = true;
 	        while (ordering) {
+	        	system("cls");
+	        	window2();
 	            cout << "Cake Catalog" << endl;
 	            cc.displayCakes();
 	            
@@ -393,19 +421,19 @@ int main(){
 	                getline(cin, custom);
 	                cout<<endl;
 	                
-	                Cake<string> selectedCake = *cc.getCakes()[choice2 - 1]; // Mengakses kue menggunakan pointer
+	                Cake<string> selectedCake = *cc.getCakes()[choice2 - 1];
 	                om.placeOrder(selectedCake, custom);
 	            } else {
 	                cout << "Invalid choice!" << endl << endl;
 	            }
 	        }
 	        
-	        // Konfirmasi pesanan
+	       
 	        cout << "\nConfirm your order? (y/n): \n";
 	        char confirm;
 	        cin >> confirm;
 	        if (confirm == 'y') {
-	            om.sortOrdersByPrice(); // Mengurutkan pesanan berdasarkan harga
+	            om.sortOrdersByPrice();
 	            vector<Order<string>> orders = om.getOrders();
 	            for (const auto &order : orders) {
 	                r.addOrder(order);
@@ -413,7 +441,6 @@ int main(){
 	            r.displayReceipt();
 	        }
 	        cout<<endl;
-	        // Pesan kembali atau keluar
 	        cout << "Do you want to order again? (y/n): ";
 	        char orderAgain;
 	        cin >> orderAgain;
