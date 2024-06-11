@@ -160,8 +160,31 @@ class OrderManager{
         }
 };
 
+
+//receipt
+template <typename T>
+class Receipt{
+    private:
+        queue<Order<T>> orderq;
+
+    public:
+        void addOrder(const Order<T> &order) {
+            orderq.push(order);
+        }
+
+        void displayReceipt() {
+            while (!orderq.empty()) {
+                Order<T> order = orderq.front();
+                order.displayOrder();
+                orderq.pop();
+            }
+        }
+};
+
+
 int main() {
     
 
     return 0;
 }
+
