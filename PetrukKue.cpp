@@ -189,9 +189,13 @@ int main(){
     OrderManager<string> om;
     Receipt<string> r;
     
-    cc.addCake("Risol Mayo", "Risol yang diisi dengan mayo dan potongan telur", 5000);
-    cc.addCake("Kue Pancong", "Kue pancong yang manis dengan taburan gula", 2000);
-    
+	cc.addCake("Risol Mayo", "Risol yang diisi dengan mayo dan potongan telur", 5000);
+	cc.addCake("Kue Pancong", "Kue pancong yang manis dengan taburan gula", 2000);
+	cc.addCake("Black Forest", "Kue ini terdiri dari kue spons, mousse dark chocolate, potongan buah ceri, dan krim chantilly. ", 380.000);
+	cc.addCake("Tiramisu", ", harmoni sempurna antara mousse mascarpone, kopi espresso  dan bubuk kakao murni ", 365.000);
+	cc.addCake("Kue Sus", "terdiri dari 10 pcs, berbagai macam rasa coklat, vanila, buah, strawberry", 10.000);
+	cc.addCake("Lapis Legit", "memiliki rasa yang khas, dan mengingatkan pada hari raya.", 200.000);
+	
     int choice;
     string username, password, custom;
     
@@ -248,5 +252,33 @@ int main(){
                     cout << "Invalid choice!" << endl << endl;
                 }
             }
-            
+                        // Konfirmasi pesanan
+            cout << "Confirm your order? (y/n): ";
+            char confirm;
+            cin >> confirm;
+            if (confirm == 'y') {
+                vector<Order<string>> orders = om.getOrders();
+                for (const auto &order : orders) {
+                    r.addOrder(order);
+                }
+                r.displayReceipt();
+            }
+            cout<<endl;
+            // Pesan kembali atau keluar
+            cout << "Do you want to order again? (y/n): ";
+            char orderAgain;
+            cin >> orderAgain;
+            if (orderAgain != 'y') {
+                break;
+            }
+        } else if (choice == 3) {
+            break;
+        } else {
+            cout << "Invalid choice!" << endl;
+        }
+    }
+    
+    return 0;
+}
+
 
