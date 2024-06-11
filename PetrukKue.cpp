@@ -182,9 +182,71 @@ class Receipt{
 };
 
 
-int main() {
+int main(){
+    UserManager<string> um;
+    um.loadUsers();
+    CakeManager<string> cc;
+    OrderManager<string> om;
+    Receipt<string> r;
     
-
-    return 0;
-}
+    cc.addCake("Risol Mayo", "Risol yang diisi dengan mayo dan potongan telur", 5000);
+    cc.addCake("Kue Pancong", "Kue pancong yang manis dengan taburan gula", 2000);
+    
+    int choice;
+    string username, password, custom;
+    
+    while (true) {
+    	//login
+        cout << "1. Register\n2. Login\n3. Exit\n";
+        cin >> choice;
+        
+        if (choice == 1) {
+            cout << "Username: ";
+            cin >> username;
+            cout << "Password: ";
+            cin >> password;
+            um.registerUser(username, password);
+            cout << "Registered successfully!" << endl << endl;
+        } else if (choice == 2) {
+            while (true) {
+                cout << "Username: ";
+                cin >> username;
+                cout << "Password: ";
+                cin >> password;
+                if (um.loginUser(username, password)) {
+                    cout << "Login Successfully!" << endl << endl;
+                    break;
+                } else {
+                    cout << "Wrong username or password!" << endl;
+                }
+            }
+            
+            // Katalog kue
+            bool ordering = true;
+            while (ordering) {
+                cout << "Cake Catalog" << endl;
+                cc.displayCakes();
+                
+                // Order kue
+                int choice2;
+                cout << "Select a cake (0 to finish): " << endl;
+                cin >> choice2;
+                
+                if (choice2 == 0) {
+                    break;
+                }
+                
+                if (choice2 > 0 && choice2 <= cc.getCakes().size()) {
+                    cout << "Customization: ";
+                    cin.ignore();
+                    getline(cin, custom);
+                    cout<<endl;
+                    
+                    Cake<string> selectedCake = cc.getCakes()[choice2 - 1];
+                    om.placeOrder(selectedCake, custom);
+                } else {
+                    cout << "Invalid choice!" << endl << endl;
+                }
+            }
+            
 
