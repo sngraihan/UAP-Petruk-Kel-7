@@ -71,11 +71,58 @@ class UserManager{
 };
 
 
+//kue
+template <typename T>
+class Cake{
+    private:
+        T name;
+        T desc;
+        double price;
+        
+    public:
+        Cake(const T &name, const T &desc, double price) : name(name), desc(desc), price(price){
+            
+        }
+        
+        T getName()const {
+            return name;
+        }
+        
+        T getDesc()const{
+            return desc;
+        }
+        
+        double getPrice()const {
+            return price;
+        }
+        
+};
+
+template <typename T>
+class CakeManager{
+    private:
+        vector<Cake<T>> cakes;
+        
+    public:
+        void addCake(const T &name, const T &desc, double price){
+            cakes.push_back(Cake<T>(name, desc, price));
+        }
+        void displayCakes() const{
+            for(size_t i = 0; i < cakes.size(); i++){
+                cout << i+1 << ". Name: " << cakes[i].getName() << endl <<
+                "Description: " << cakes[i].getDesc() << endl << 
+                "Price: Rp" << cakes[i].getPrice() <<endl << endl;
+            }
+        }
+        vector<Cake<T>> getCakes()const {
+            return cakes;
+        }        
+};
+
+
 
 int main() {
-	
-	
-	
+    
+
     return 0;
 }
-
