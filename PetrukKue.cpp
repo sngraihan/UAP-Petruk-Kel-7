@@ -314,6 +314,8 @@ void window(){
 
 void window2(){
 	textcolor(PURPLE);
+	gotoxy(midx-7, 1);
+	cout << "Cake Catalog" << endl;
 	for(int i=1; i<maxx+1; i++){
 	gotoxy(i, 2);
 	cout << "\xcd";
@@ -347,7 +349,6 @@ int main(){
 	system("cls");
 	
 	textcolor(PURPLE);
-	window();
 	textcolor(WHITE);	
 	UserManager<string> um;
 	um.loadUsers();
@@ -365,12 +366,12 @@ int main(){
 	int choice;
 	string username, password, custom;
 	
-	textcolor(PURPLE);
-	window();
-	textcolor(WHITE);
+
 	
 	while (true) {
-		
+		textcolor(PURPLE);
+		window();
+		textcolor(WHITE);
 		gotoxy(midx-20, midy+3);
 		cout << "Login first!";
 		gotoxy(midx-5, midy+2);
@@ -397,8 +398,16 @@ int main(){
 	        um.registerUser(username, password);
 	        gotoxy(midx-15, midy+10);
 	        cout << "Registered successfully!" << endl << endl;
+	        gotoxy(midx-15, midy+8);
+	        cout << "                              ";
+	        gotoxy(midx-15, midy+9);
+	        cout << "                              ";
+	        gotoxy(midx-5, midy+6);
+	         cout << "                              ";
 	    } else if (choice == 2) {
 	        while (true) {
+	        	gotoxy(midx-15, midy+10);
+	       		cout << "                              ";
 	            gotoxy(midx-15, midy+8);
 		        cout << "Username: ";
 		        gotoxy(midx-5, midy+8);
@@ -423,7 +432,7 @@ int main(){
 	        while (ordering) {
 	        	system("cls");
 	        	window2();
-	            cout << "Cake Catalog" << endl;
+	            
 	            cc.displayCakes();
 	            
 	            // Order kue
