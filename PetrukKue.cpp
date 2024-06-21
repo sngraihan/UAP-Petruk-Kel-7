@@ -1,10 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <string>
 #include <stack>
 #include <queue>
-#include <list>
 #include <algorithm>
 #include <conio.h>
 #include <windows.h>
@@ -35,6 +33,7 @@ COORD CursorPosition;
 
 int maxy= 29, maxx=119, midy=maxy/2, midx=maxx/2;
 
+//raihan
 void gotoxy( short x, short y )
 {
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE) ;
@@ -59,6 +58,7 @@ void setcursor(bool visible, DWORD size)
 }
 
 //User
+//raihan
 template <typename T>
 class User{
 	private:
@@ -118,6 +118,7 @@ class UserManager{
 };
 
 //kue
+//golib
 template <typename T>
 class Cake{
 	private:
@@ -172,6 +173,7 @@ class CakeManager{
 };
 
 //order
+//amala
 template <typename T>
 class Order {
 	private:
@@ -247,6 +249,7 @@ class OrderManager{
 };
 
 //receipt
+//golib
 template <typename T>
 class Receipt{
 	private:
@@ -261,7 +264,6 @@ class Receipt{
 	    	time_t now = time(0);
             tm *ltm = localtime(&now);
 
-            // Tampilkan waktu saat ini
             cout << "Time: " 
                  << 1900 + ltm->tm_year << "-"
                  << 1 + ltm->tm_mon << "-"
@@ -278,6 +280,7 @@ class Receipt{
 	    }
 };
 
+//raihan
 void window(){
 	for(int i=1; i<maxx+1; i++){
 	gotoxy(i, midy+1);
@@ -344,7 +347,7 @@ void window2(){
 }
 
 int main(){
-	
+	//raihan
 	setcursor(0,0);
 	system("cls");
 	
@@ -403,11 +406,12 @@ int main(){
 	        gotoxy(midx-15, midy+9);
 	        cout << "                              ";
 	        gotoxy(midx-5, midy+6);
-	         cout << "                              ";
+	        cout << "                              ";
+	        Sleep(500);
+			gotoxy(midx-15, midy+10);
+	       	cout << "                              ";
 	    } else if (choice == 2) {
 	        while (true) {
-	        	gotoxy(midx-15, midy+10);
-	       		cout << "                              ";
 	            gotoxy(midx-15, midy+8);
 		        cout << "Username: ";
 		        gotoxy(midx-5, midy+8);
@@ -415,7 +419,7 @@ int main(){
 		        gotoxy(midx-15, midy+9);
 		        cout << "Password: ";
 		        gotoxy(midx-5, midy+9);
-		        cin >> password;
+		        cin >> password;`	
 	            if (um.loginUser(username, password)) {
 	            	gotoxy(midx-5, midy+10);
 	                cout << "Login Successfully!" << endl << endl;
@@ -423,11 +427,16 @@ int main(){
 	            } else {
 	            	gotoxy(midx-5, midy+10);
 	                cout << "Wrong username or password!" << endl;
+	                gotoxy(midx-5, midy+8);
+	                cout << "                       ";
+	                gotoxy(midx-15, midy+9);
+	                cout << "                       ";
 	            }
 	        }
 	        
 	        gotoxy(midx-7, 1);
 	        // Katalog kue
+	        //golib
 	        bool ordering = true;
 	        while (ordering) {
 	        	system("cls");
@@ -457,7 +466,7 @@ int main(){
 	            }
 	        }
 	        
-	       	
+	       	//amala
 	       	window2();
 	        cout << "\nConfirm your order? (y/n): \n";
 	        cout << endl;
